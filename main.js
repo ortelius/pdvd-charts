@@ -71,7 +71,7 @@ function createYamlOutput () {
     description: 'Post-Deployment Vulnerability Detection and AI Remediation',
     home: 'https://ortelius.io',
     icon: 'https://ortelius.github.io/pdvd-charts/ortelius.svg',
-    keywords: ['Vulnerability', 'Vulnerability', 'Remediation', 'AI', 'SBOM'],
+    keywords: ['Vulnerability', 'Remediation', 'AI', 'SBOM'],
     type: 'application',
     version: chartVersion,
     appVersion: '12.0.0',

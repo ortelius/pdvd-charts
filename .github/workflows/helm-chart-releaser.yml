@@ -49,7 +49,7 @@ jobs:
            echo "dhurl=${{ env.DHURL }}"
            echo "branch=${BRANCH}"
            echo "chart_version=${BASE_VERSION}.${{ github.run_number }}"
-           echo "compname=deployhub"
+           echo "compname=pdvd"
            echo "image_repo_tag=${{ env.REGISTRY }}/${{ github.repository }}:${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
            echo "image_repository=${{ env.REGISTRY }}/${{ github.repository }}"
            echo "image_tag=${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
