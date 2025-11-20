@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  pdvd-charts:
+  - apiVersion: v2
+    appVersion: 12.0.0
+    created: "2025-11-20T20:21:47.199623206Z"
+    description: Ortelius App
+    digest: c005714cf4079b1afec1889291845179604838480f725bdc97366a5341b59392
+    icon: https://ortelius.github.io/pdvd-charts/ortelius.svg
+    name: pdvd-charts
+    type: application
+    urls:
+    - https://github.com/ortelius/pdvd-charts/releases/download/pdvd-charts-12.0.0/pdvd-charts-12.0.0.tgz
+    version: 12.0.0
+generated: "2025-11-20T20:21:47.199297757Z"
