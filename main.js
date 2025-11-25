@@ -6,7 +6,8 @@ require('process')
 const chartRepos = [
   'ortelius/pdvd-arangodb',
   'ortelius/pdvd-backend',
-  'ortelius/pdvd-frontend'
+  'ortelius/pdvd-frontend',
+  'ortelius/pdvd-osvdev-job'  
 ]
 
 // Helper functions
