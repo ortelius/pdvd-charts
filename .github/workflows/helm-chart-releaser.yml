@@ -88,13 +88,13 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           # Update the HelmRelease file
-          sed -i "s/version: \".*\"/version: \"${CHART_VERSION}\"/" pdvd-helmrelease.yaml
+          sed -i.bak "s/version: \".*\"/version: \"${CHART_VERSION}\"/" clusters/gke/pdvd/pdvd-helmrelease.yaml
           
           # Commit and push if there are changes
           if git diff --quiet; then
             echo "No changes to commit"
           else
-            git add pdvd-helmrelease.yaml
+            git add clusters/gke/pdvd/pdvd-helmrelease.yaml
             git commit -m "chore: update pdvd chart version to ${CHART_VERSION}"
             git push origin main
             echo "Successfully updated HelmRelease to version ${CHART_VERSION}"
