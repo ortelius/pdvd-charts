@@ -73,39 +73,3 @@ jobs:
           gh_token: ${{ secrets.HELM_INDEXER_TOKEN }}
           gh_handle: ${{ needs.setenv.outputs.gh_handle }}
           chart: charts/${{ needs.setenv.outputs.compname }}
-
-      - name: Update HelmRelease in pdvd-platform repo
-        env:
-          GH_TOKEN: ${{ secrets.HELM_INDEXER_TOKEN }}
-        run: |
-          # Get the chart version from the latest commit message
-          CHART_VERSION=$(git log -n 1 --oneline | grep -oP 'pdvd-\K[0-9]+\.[0-9]+\.[0-9]+')
-          
-          if [ -z "$CHART_VERSION" ]; then
-            echo "Could not extract chart version from commit message"
-            exit 1
-          fi
-          
-          echo "Extracted chart version: ${CHART_VERSION}"
-          
-          # Clone the pdvd-platform repo
-          git clone https://x-access-token:${GH_TOKEN}@github.com/ortelius/pdvd-platform.git
-          cd pdvd-platform
-          
-          # Configure git
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Update the HelmRelease file
-          sed -i.bak "s/version: \".*\"/version: \"${CHART_VERSION}\"/" clusters/gke/pdvd/pdvd-helmrelease.yaml
-          rm clusters/gke/pdvd/pdvd-helmrelease.yaml.bak
-          
-          # Commit and push if there are changes
-          if git diff --quiet; then
-            echo "No changes to commit"
-          else
-            git add clusters/gke/pdvd/pdvd-helmrelease.yaml
-            git commit -m "chore: update pdvd chart version to ${CHART_VERSION}"
-            git push origin main
-            echo "Successfully updated HelmRelease to version ${CHART_VERSION}"
-          fi
