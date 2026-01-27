@@ -73,3 +73,29 @@ jobs:
           gh_token: ${{ secrets.HELM_INDEXER_TOKEN }}
           gh_handle: ${{ needs.setenv.outputs.gh_handle }}
           chart: charts/${{ needs.setenv.outputs.compname }}
+
+      - name: Update HelmRelease in pdvd-platform repo
+        env:
+          GH_TOKEN: ${{ secrets.HELM_INDEXER_TOKEN }}
+          CHART_VERSION: ${{ needs.setenv.outputs.chart_version }}
+        run: |
+          # Clone the pdvd-platform repo
+          git clone https://x-access-token:${GH_TOKEN}@github.com/ortelius/pdvd-platform.git
+          cd pdvd-platform
+          
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Update the HelmRelease file
+          sed -i "s/version: \".*\"/version: \"${CHART_VERSION}\"/" pdvd-helmrelease.yaml
+          
+          # Commit and push if there are changes
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git add pdvd-helmrelease.yaml
+            git commit -m "chore: update pdvd chart version to ${CHART_VERSION}"
+            git push origin main
+            echo "Successfully updated HelmRelease to version ${CHART_VERSION}"
+          fi
