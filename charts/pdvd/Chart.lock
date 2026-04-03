@@ -1,0 +1,18 @@
+dependencies:
+- name: pdvd-arangodb
+  repository: https://ortelius.github.io/pdvd-arangodb/
+  version: 12.0.18
+- name: pdvd-backend
+  repository: https://ortelius.github.io/pdvd-backend/
+  version: 12.0.519
+- name: pdvd-frontend
+  repository: https://ortelius.github.io/pdvd-frontend/
+  version: 12.0.1583
+- name: pdvd-osvdev-job
+  repository: https://ortelius.github.io/pdvd-osvdev-job/
+  version: 12.0.199
+- name: pdvd-relscanner-job
+  repository: https://ortelius.github.io/pdvd-relscanner-job/
+  version: 12.0.18
+digest: sha256:e56c6f873b9f9002bbd20336201251ae5a2296ffb0fc4ed367e2ee5b2f88eaaa
+generated: "2026-04-03T15:24:34.679624805Z"
