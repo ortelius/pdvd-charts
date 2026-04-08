@@ -4,7 +4,7 @@ dependencies:
   version: 12.0.18
 - name: pdvd-backend
   repository: https://ortelius.github.io/pdvd-backend/
-  version: 12.0.519
+  version: 12.0.538
 - name: pdvd-frontend
   repository: https://ortelius.github.io/pdvd-frontend/
   version: 12.0.1583
@@ -14,5 +14,5 @@ dependencies:
 - name: pdvd-relscanner-job
   repository: https://ortelius.github.io/pdvd-relscanner-job/
   version: 12.0.18
-digest: sha256:e56c6f873b9f9002bbd20336201251ae5a2296ffb0fc4ed367e2ee5b2f88eaaa
-generated: "2026-04-07T08:34:54.031010886Z"
+digest: sha256:7a1f2a1b36bc362f44d28de8be1ed8a8208c2d72a369ccce1df6e854712d28d1
+generated: "2026-04-08T08:34:28.592674652Z"
