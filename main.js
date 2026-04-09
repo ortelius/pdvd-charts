@@ -4,22 +4,22 @@ const fs = require('fs')
 require('process')
 
 const chartRepos = [
-  'ortelius/pdvd-arangodb',
-  'ortelius/pdvd-backend',
-  'ortelius/pdvd-frontend',
-  'ortelius/pdvd-osvdev-job',  
-  'ortelius/pdvd-relscanner-job' 
+  'ortelius/arangodb',
+  'ortelius/ortelius',
+  'ortelius/frontend',
+  'ortelius/osvdev-job',  
+  'ortelius/relscanner-job' 
 ]
 
 // Helper functions
 async function getChartEntries () {
   let sha = ''
 
-  await axios.get('https://api.github.com/repos/ortelius/pdvd-charts/commits/main').then(response => {
+  await axios.get('https://api.github.com/repos/ortelius/parent-charts/commits/main').then(response => {
     sha = response.data.sha
   })
 
-  const url = 'https://raw.githubusercontent.com/ortelius/pdvd-charts/' + sha + '/charts/pdvd/Chart.yaml'
+  const url = 'https://raw.githubusercontent.com/ortelius/parent-charts/' + sha + '/charts/pdvd/Chart.yaml'
   let parts = []
   let latest = ''
   let ver = ''
@@ -72,7 +72,7 @@ function createYamlOutput () {
     name: 'pdvd',
     description: 'Post-Deployment Vulnerability Detection and AI Remediation',
     home: 'https://ortelius.io',
-    icon: 'https://ortelius.github.io/pdvd-charts/ortelius.svg',
+    icon: 'https://ortelius.github.io/parent-charts/ortelius.svg',
     keywords: ['Vulnerability', 'Remediation', 'AI', 'SBOM'],
     type: 'application',
     version: chartVersion,

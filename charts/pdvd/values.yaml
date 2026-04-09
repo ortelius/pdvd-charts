@@ -1,8 +1,8 @@
 # --------------------------------------------------------------------------
-# 1. pdvd-arangodb Subchart Configuration
+# 1. arangodb Subchart Configuration
 #    These values are intended for the ArangoDB dependency chart.
 # --------------------------------------------------------------------------
-pdvd-arangodb:
+arangodb:
   # The password is marked as REQUIRED in the template logic.
   # Helm will fail if this value is missing or commented out.
   arangodb_pass: "" 
@@ -14,10 +14,10 @@ pdvd-arangodb:
   arangodb_name: "vulnmgt"
 
 # --------------------------------------------------------------------------
-# 2. pdvd-frontend Subchart Configuration
+# 2. frontend Subchart Configuration
 #    These values are intended for the Frontend dependency chart.
 # --------------------------------------------------------------------------
-pdvd-frontend:
+frontend:
   ingress:
     type: "glb"
   graphqlEndpoint: "https://app.ortelius.io/api/v1/graphql"
