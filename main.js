@@ -19,7 +19,7 @@ async function getChartEntries () {
     sha = response.data.sha
   })
 
-  const url = 'https://raw.githubusercontent.com/ortelius/helmcharts/' + sha + '/charts/pdvd/Chart.yaml'
+  const url = 'https://raw.githubusercontent.com/ortelius/helmcharts/' + sha + '/charts/ortelius/Chart.yaml'
   let parts = []
   let latest = ''
   let ver = ''
@@ -69,7 +69,7 @@ async function getChartEntries () {
 function createYamlOutput () {
   const output = yaml.dump({
     apiVersion: 'v2',
-    name: 'pdvd',
+    name: 'ortelius',
     description: 'Post-Deployment Vulnerability Detection and AI Remediation',
     home: 'https://ortelius.io',
     icon: 'https://ortelius.github.io/helmcharts/ortelius.svg',
