@@ -67,11 +67,7 @@ jobs:
 
     steps:
       - name: Helm Chart Releaser
-<<<<<<< HEAD
         uses: ortelius/workflow-toolkit/.github/workflows/release-action-using-tag.yml@467223eadd0705313fa26090dd52f8b6b3d335bf
-=======
-        uses: DeployHubProject/ms-cr-action@1930035aa690283dad519e1799fa04c20a133f4a
->>>>>>> 94e282655150f448c38067848420213dedf19e29
         with:
           gpg_keyring_base64: ${{ secrets.GPG_KEYRING_BASE64 }}
           gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
