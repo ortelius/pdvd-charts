@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types:
-      - generate-main-chart  
+      - generate-main-chart
+
 jobs:
   setenv:
     runs-on: ubuntu-latest
@@ -29,7 +30,7 @@ jobs:
       - name: Harden Runner
         uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
         with:
-          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          egress-policy: audit
 
       - name: Checkout
         id: checkout
@@ -48,30 +49,27 @@ jobs:
           BASE_VERSION=$(curl -s "https://deployhubproject.github.io/${{ github.event.repository.name }}/index.yaml" | grep version: | awk '{print $2}' | cut -f1-2 -d. | sort -u -r --version-sort | head -1)
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c 1-6)
           {
-           echo "dhurl=${{ env.DHURL }}"
-           echo "branch=${BRANCH}"
-           echo "chart_version=${BASE_VERSION}.${{ github.run_number }}"
-           echo "compname=ortelius"
-           echo "image_repo_tag=${{ env.REGISTRY }}/${{ github.repository }}:${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
-           echo "image_repository=${{ env.REGISTRY }}/${{ github.repository }}"
-           echo "image_tag=${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
-           echo "image_version=${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
-           echo "registry=${{ env.REGISTRY }}"
-           echo "short_sha=${SHORT_SHA}"
-           echo "gh_handle=$GITHUB_ACTOR"
+            echo "dhurl=${{ env.DHURL }}"
+            echo "branch=${BRANCH}"
+            echo "chart_version=${BASE_VERSION}.${{ github.run_number }}"
+            echo "compname=ortelius"
+            echo "image_repo_tag=${{ env.REGISTRY }}/${{ github.repository }}:${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
+            echo "image_repository=${{ env.REGISTRY }}/${{ github.repository }}"
+            echo "image_tag=${BRANCH}-v${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
+            echo "image_version=${BASE_VERSION}.${{ github.run_number }}-g${SHORT_SHA}"
+            echo "registry=${{ env.REGISTRY }}"
+            echo "short_sha=${SHORT_SHA}"
+            echo "gh_handle=$GITHUB_ACTOR"
           } >> "$GITHUB_OUTPUT"
 
   release:
-    runs-on: ubuntu-latest
     needs: setenv
-
-    steps:
-      - name: Helm Chart Releaser
-        uses: ortelius/workflow-toolkit/.github/workflows/release-action-using-tag.yml@467223eadd0705313fa26090dd52f8b6b3d335bf
-        with:
-          gpg_keyring_base64: ${{ secrets.GPG_KEYRING_BASE64 }}
-          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          gpg_key: ${{ secrets.GPG_KEY }}
-          gh_token: ${{ secrets.HELM_INDEXER_TOKEN }}
-          gh_handle: ${{ needs.setenv.outputs.gh_handle }}
-          chart: charts/${{ needs.setenv.outputs.compname }}
+    uses: ortelius/workflow-toolkit/.github/workflows/release-action-using-tag.yml@467223eadd0705313fa26090dd52f8b6b3d335bf
+    with:
+      gh_handle: ${{ needs.setenv.outputs.gh_handle }}
+      chart: charts/${{ needs.setenv.outputs.compname }}
+    secrets:
+      gpg_keyring_base64: ${{ secrets.GPG_KEYRING_BASE64 }}
+      gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      gpg_key: ${{ secrets.GPG_KEY }}
+      gh_token: ${{ secrets.HELM_INDEXER_TOKEN }}
