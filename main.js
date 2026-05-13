@@ -25,13 +25,12 @@ async function getChartEntries () {
   let ver = ''
 
   await axios.get(url).then(response => {
-    const parsedYaml = yaml.load(response.data)
-    chartVersion = parsedYaml.version
-    parts = chartVersion.split('.')
-    ver = parseInt(parts[2]) + 1
-    parts[2] = ver.toString()
-    chartVersion = parts.join('.')
-  })
+      const parsedYaml = yaml.load(response.data)
+      chartVersion = parsedYaml.version
+      parts = chartVersion.split('.')
+      parts[2] = process.env.RUN_NUMBER
+      chartVersion = parts.join('.')
+    })
 
   const latestChart = []
 

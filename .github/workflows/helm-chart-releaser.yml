@@ -63,7 +63,7 @@ jobs:
 
   release:
     needs: setenv
-    uses: ortelius/workflow-toolkit/.github/workflows/helm-release-workflow.yml@0d7beb81302a2e2710ca2cae5aef43617693d3ae
+    uses: ortelius/workflow-toolkit/.github/workflows/helm-release-workflow.yml@89a4e9c31957676bad627cea4fb6977a2e01794d
     with:
       gh_repository_owner: ${{ github.repository_owner }}
       gh_event_name: ${{ github.event_name }}
@@ -73,6 +73,7 @@ jobs:
       chart_version: ${{ github.event_name != 'repository_dispatch' && needs.setenv.outputs.chart_version || '' }}
       image_repository: ${{ needs.setenv.outputs.image_repository }}
       image_tag: ${{ needs.setenv.outputs.image_tag }}
+      run_number: ${{ github.run_number }}
     secrets:
       GPG_KEYRING_BASE64: ${{ secrets.GPG_KEYRING_BASE64 }}
       GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
