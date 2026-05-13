@@ -63,7 +63,7 @@ jobs:
 
   release:
     needs: setenv
-    uses: ortelius/workflow-toolkit/.github/workflows/helm-release-workflow.yml@5c1dbcf961d2ee846a3fb2104ffc814d40f596b1
+    uses: ortelius/workflow-toolkit/.github/workflows/helm-release-workflow.yml@0d7beb81302a2e2710ca2cae5aef43617693d3ae
     with:
       gh_repository_owner: ${{ github.repository_owner }}
       gh_event_name: ${{ github.event_name }}
