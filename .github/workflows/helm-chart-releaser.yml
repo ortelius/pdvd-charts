@@ -70,7 +70,7 @@ jobs:
       gh_ref: ${{ github.ref }}
       gh_handle: ${{ needs.setenv.outputs.gh_handle }}
       chart: charts/${{ needs.setenv.outputs.compname }}
-      chart_version: ${{ needs.setenv.outputs.chart_version }}
+      chart_version: ${{ github.event_name != 'repository_dispatch' && needs.setenv.outputs.chart_version || '' }}
       image_repository: ${{ needs.setenv.outputs.image_repository }}
       image_tag: ${{ needs.setenv.outputs.image_tag }}
     secrets:
